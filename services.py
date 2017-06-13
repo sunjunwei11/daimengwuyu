@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 import bottle,json,MySQLdb
-from bottle import run, request, response, post, get, template, route, static_file
+from bottle import run, request, response, post, get, template, route, static_file,Bottle
 db = MySQLdb.connect("localhost", "root", "312312","daimengwuyu",charset="utf8")
 
-@bottle.route('/index')
+mybottle = Bottle()
+@mybottle.route('/index')
 def index():
     return static_file("index.html",root=".")
 
-@bottle.route('/js/<path>')
+@mybottle.route('/js/<path>')
 def server_js(path):
     return static_file(path, root='js')
 
-@bottle.route('/css/<path>')
+@mybottle.route('/css/<path>')
 def server_css(path):
     return static_file(path, root='css')
 
-@bottle.route('/picture/<path>')
+@mybottle.route('/picture/<path>')
 def server_picture(path):
     return static_file(path, root='picture')
 
-@bottle.route('/check_userid', method = 'POST')
+@mybottle.route('/check_userid', method = 'POST')
 def check_userid():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -37,7 +38,7 @@ def check_userid():
         result["can_use"] = True
     return result
 
-@bottle.route('/signup', method = 'POST') #注册新用户时执行的函数
+@mybottle.route('/signup', method = 'POST') #注册新用户时执行的函数
 def signup():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -58,7 +59,7 @@ def signup():
     result["success"] = True
     return result
 
-@bottle.route('/login', method = 'POST') #用户登录执行的函数，并返回该用户的个人信息以及朋友圈的数据
+@mybottle.route('/login', method = 'POST') #用户登录执行的函数，并返回该用户的个人信息以及朋友圈的数据
 def login():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -110,7 +111,7 @@ def login():
     print "result:",result
     return result
 
-@bottle.route('/message_receive', method = 'POST')
+@mybottle.route('/message_receive', method = 'POST')
 def message_receive():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -130,7 +131,7 @@ def message_receive():
     print "上传的消息内容：",userid,message_time,renwusheding,fabu_content,selected_fabu_pic_src
     return result
 
-@bottle.route('/dianzhan', method = 'POST')
+@mybottle.route('/dianzhan', method = 'POST')
 def dianzhan():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -161,7 +162,7 @@ def dianzhan():
     cr.close()
     return result
 
-@bottle.route('/pinglun_receive', method = 'POST') #发布新的评论过来时执行的函数
+@mybottle.route('/pinglun_receive', method = 'POST') #发布新的评论过来时执行的函数
 def pinglun_receive():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -180,7 +181,7 @@ def pinglun_receive():
     result["success"] = True
     return result
 
-@bottle.route('/pinglun_return', method = 'POST') #返回用户请求查看的评论信息
+@mybottle.route('/pinglun_return', method = 'POST') #返回用户请求查看的评论信息
 def pinglun_return():
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
@@ -205,4 +206,5 @@ def pinglun_return():
     return result
     
     
-bottle.run(host="127.0.0.1",port=8080)
+#bottle.run(host="127.0.0.1",port=8080)
+run(app=mybottle)
