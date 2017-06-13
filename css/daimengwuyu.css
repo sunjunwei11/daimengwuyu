@@ -1,0 +1,279 @@
+#main{
+}
+
+#main > .header {
+	background-color: white;
+}
+
+.header_logo{
+	position: absolute;
+	background-size: 100% 100%;
+	top:0.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.personal_infor{
+	background-image:  url('../picture/person_inf.png');
+	left:0.4em;
+	height:2.2em;
+	width:2.2em;
+}
+
+.scan{
+	background-image:  url('../picture/scan.png');
+	right:0.7em;
+	height:2em;
+	width:2em;
+}
+
+.logo_back {
+	background-image:  url('../picture/logo-back.png');
+	top:0.2em;
+	left:0.4em;
+	height:2.2em;
+	width:2.2em;
+}
+
+#main > .header > h1{
+	margin:0;
+	padding: 0.2em;
+	padding-bottom: 0em;
+}
+
+#main > .header > h1 > .haoyou {
+	display: inline-block;padding-right: 0.5em;
+}
+
+#main > .header > h1 > .haoyou > a {
+	margin:0;
+	font-size:100%;
+	padding: 0.3em;
+	background-color: white;
+	border:none;
+}
+
+hr {
+	width:1.2em;padding: 0;margin-top: 0;border-color: red;
+}
+
+#main > .header > h1 > .remeng{
+	display: inline-block;
+	padding-left: 0.5em;
+}
+
+#main > .header > h1 > .remeng > a {
+	margin:0;
+	font-size:100%;
+	padding: 0.3em;
+	background-color: white;
+	border:none;
+	color:gray;
+}
+
+#main > .footer {
+	bottom: 0;width:100%;background-color: white;
+}
+
+#main > .footer > h1 {
+	padding: 0;margin: 0;
+}
+
+#main > .footer > h1 >.shuaxin_fabu {
+	position: relative;
+	height:1.5em;
+	padding-top: 0.7em;
+	padding-bottom: 0.3em;
+}
+
+#main > .footer > h1 >.shuaxin_fabu > .shuaxin{
+	position: absolute;
+	width:50%;
+	text-align: center;
+	font-size: 0.8em;
+	color:rgba(3, 3, 3, 0.94);
+	margin:0;padding: 0;
+}
+
+#main > .footer > h1 >.shuaxin_fabu > .fabu {
+	position: absolute;
+	width:50%;left:50%;
+	text-align: center;
+	font-size: 0.8em;
+	margin:0;padding: 0;
+	border-left: solid 1px #e3e2e2;
+	color:rgba(3, 3, 3, 0.94);
+}
+
+.message{
+	background-color: white;
+	position: relative;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #e3e2e2;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #e3e2e2;
+	text-shadow: none;
+	padding-top: 0.4em;
+	padding-bottom: 0;
+	margin-top: 0.6em;
+}
+
+.message > .mess_head{
+	position: relative;
+	width:100%;height: 3.4em;
+	left:0em;top:0em;
+	margin-left:0.5em;
+}
+
+.message > .mess_head > .head_picture{
+	position: absolute;
+	width:3em;
+	height:3em;
+	left:0em;
+	top:0em;
+	margin: 0.2em;
+	background-image: url('../picture/head_zzm1.jpg');
+	background-size: 100% 100%;
+}
+.message > .mess_head > .mess_name_time{
+	position: absolute;
+	width:10em;
+	height:3em;
+	left:4em;
+	top:0em;
+	margin-top: 0.4em;
+}
+
+.message > .mess_head > .mess_name_time > .mess_name{
+	font-size: 1em;
+	padding: 0em;
+	color:#f60202;
+}
+
+.message > .mess_head > .mess_name_time > .mess_time{
+	font-size: 0.6em;
+	margin-top:0.6em;
+}
+
+.message > .renwusheding{
+	position: relative;
+	margin: 0.2em;
+	margin-left: 0.5em;
+}
+
+.message > .renwusheding > p {
+	margin:0;
+	color:rgb(246, 0, 0);
+	text-shadow: 0 0 1px black;
+}
+
+.message > .mess_content{
+	position: relative;
+	margin: 0.2em;
+	margin-left: 0.5em;
+}
+
+.message > .pinglun_content{
+	position: relative;
+	margin: 0.2em;
+	margin-left: 4em;	
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #e3e2e2;
+}
+
+.message > .mess_content > p ,.message > .pinglun_content > p{
+	margin:0;
+	color:#005b1c;
+	font-family:"楷体";
+}
+
+.message > img {
+	height:10em;
+	width:12em;
+	margin:0.4em;
+	margin-left: 0.5em;
+	border-top:1px solid black;
+}
+
+.dianzhan_pinglun{
+	position: relative;
+	height:1.5em;
+	border-top: solid 1px #e3e2e2;
+	padding: 0; 
+	padding-top: 0.4em;
+}
+
+.dianzhan{
+	position: absolute;
+	width:50%;
+	text-align: center;
+	font-size: 0.8em;
+	color:gray;
+	margin:0;
+	padding: 0;
+}
+
+.yidianzhan{
+	position: absolute;
+	width:50%;
+	text-align: center;
+	font-size: 0.8em;
+	color:red;
+	margin:0;
+	padding: 0;	
+}
+
+.pinglun{
+	display: block;
+	text-decoration: none;
+	outline: none;
+	position: absolute;
+	width:50%;
+	left:50%;
+	text-align: center;
+	font-size: 0.8em;
+	margin:0;
+	padding: 0;
+	border-left: solid 1px #e3e2e2;
+	color:gray; 
+}
+
+.tishi{
+	font-size: 0.8em;
+	color:green;
+	margin:0;
+	padding: 0;
+	margin-left:0.5em;
+	width:100%;
+	text-shadow:0px 0px 1px black;
+}
+
+.select_head_picture {
+	opacity: 0.7;
+	height:4em;width:4em;
+	margin-left: 0.3em;
+	background-image:  url('../picture/person_inf.png');
+	background-size: 100% 100%;
+	border:solid 1px rgba(151, 154, 151, 0.87);
+	position: relative;
+	background-position: 0 -0.2em;
+	background-repeat: none;
+}
+
+.select_head_picture > p{
+	position: absolute;bottom: 0;
+}
+
+.images > img ,#fabu_content_div > img{
+	padding:0.15em;
+	width:5em;
+	height:5em;
+}
+
+#pinglun_content > .message > .mess_head > .mess_name_time > .mess_name{
+	font-family: "楷体";
+	color: #d04343;
+}
