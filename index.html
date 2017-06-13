@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>呆萌物语</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<script type="text/javascript" src="./js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="./js/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/daimengwuyu.css">
+	</head>
+	<body>
+
+		<div data-role="page" id="login"> <!-- 登录界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<a href="#about" data-rel="dialog" data-transition="pop"
+                    class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all">简介</a>
+				<h1>呆萌物语</h1>
+			</div>
+			<div data-role="content">
+				<div style="position:relative;height:11em;">
+					<img id="launcher-img" src="./picture/big_hero1.png" 
+						 style="position:absolute;
+						 		height:10em;
+						 		width:6em;
+						 		background-color: rgba(55, 136, 60, 0.96);">
+					<div style="position:absolute;left:7em;">
+                        <p  style="font-size:1.2em;color: rgba(55, 136, 60, 0.96);">拟人的物品 呆萌的语言</p>
+                        <p  style="font-size:0.7em;">
+                            在这万物互联的世界里，给物品赋予灵魂。</br>用呆萌的语言，述说你的故事。
+                        </p>
+                    </div>
+				</div>
+				<input id="login_userid" type="text" name="username" placeholder="用户名" >
+				<input id="login_password" type="text" name="password" placeholder="密码" >
+				<p id="login-result"></p>
+				<input id="login_button" type="button" name="login" value="登录">
+				<input type="button" name="sign" value="注册" onclick="window.location='#sign'">
+			</div>
+		</div>
+
+		<div data-role="page" id="about">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>项目介绍</h1>
+			</div>
+			<div data-role="content">
+				<p>这里是对项目的介绍内容</p>
+			</div>
+		</div>
+
+		<div data-role="page" id="sign"> <!-- 注册界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="window.location='#login'"></div>
+				<h1>注 册</h1>
+			</div>
+			<div data-role="content">
+                <form>
+                    <input id="signup_user_id" type="text" data-clear-btn="true" placeholder="用户名" />
+                    <p id="signup-user-id-tip" style="display:none;" class="tips-text"></p>
+                    <input id="signup-password" type="password" data-clear-btn="true" placeholder="密码" />
+                    <input id="signup-password-repeat" type="password" data-clear-btn="true" placeholder="重复密码" />
+                    <p id="signup-password-tip" style="display:none;color:red;" class="tips-text"></p>
+                    <div style="position:relative;">
+	                    <div class="select_head_picture" >
+	                    	<p class="tishi">选择头像</p>
+	                    </div>
+	                    <p id="mengmengda" style="position: absolute;left:5.8em;top:0.5em;
+	                    color:rgba(167, 60, 60, 0.63);font-size:0.9em;">来设置萌萌哒的头像吧~</p>
+                    </div>
+                    
+
+                    <p style="margin-top:2em;background-color:#FFFACD;font-size:0.7em;color:gray;padding:0.7em;">
+                        以下信息为可选填信息，可用于找回密码以及更好地认证身份以及完善个人信息，信息会进行保密，并不会泄露个人隐私。
+                    </p>
+                    <input id="signup-user-mobile" type="text" data-clear-btn="true" placeholder="手机号码" />
+                    <input id="signup-user-email" type="text" data-clear-btn="true" placeholder="邮箱" />
+
+                    <input id="signup-user-address" type="text" data-clear-btn="true" placeholder="住址" />
+                    <p id="signup-result" style="color:red;" class="tips-text"></p>
+                    <input id="signup" type="button" value="提交" />
+                </form>
+			</div>
+		</div>
+
+		<div data-role="page" id="select_picture"> <!-- 选择图像界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="javascript:history.back(-1);"></div>
+				<h1>选择头像</h1>
+				<a id="select_picture_determine" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all" style="color:rgba(23, 111, 42, 0.88);">确定</a>
+			</div>
+			<div data-role="content" class = "images">
+			<img src="./picture/zzm1.jpg" chosed="0"><img src="./picture/zzm3.jpg" chosed="0"><img src="./picture/zzm4.jpg" chosed="0"
+			><img src="./picture/zzm5.jpg" chosed="0"><img src="./picture/zzm6.jpg" chosed="0"><img src="./picture/zzm7.jpg" chosed="0"
+			><img src="./picture/lh1.jpg"><img src="./picture/lh1.jpg"><img src="./picture/lh1.jpg"><img src="./picture/lh2.jpg"
+			><img src="./picture/lh3.jpg"><img src="./picture/lh2.jpg"><img src="./picture/lh4.jpg"><img src="./picture/lh4.jpg"
+			><img src="./picture/lh4.jpg"><img src="./picture/yy1.jpg"><img src="./picture/yy1.jpg"><img src="./picture/yy1.jpg"
+			><img src="./picture/yy2.jpg"><img src="./picture/yy2.jpg"><img src="./picture/yy2.jpg"><img src="./picture/zzm1.jpg"
+			><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg"
+			><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg"><img src="./picture/zzm1.jpg">
+			</div>
+		</div>
+
+		<div data-role="page" id="main"> <!-- 显示好友以及热门信息的总界面 -->
+
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" class="header">
+            	<div class="header_logo personal_infor"></div>
+				<h1>
+					<div class="haoyou">
+						<a class="ui-btn ui-btn-inline ui-mini ui-corner-all">好友</a>
+						<hr>
+					</div>
+
+					<div class="remeng">
+						<a class="ui-btn ui-btn-inline ui-mini ui-corner-all" >热门</a>
+					</div>
+                </h1>
+                <div class="header_logo scan"></div>
+			</div>
+
+			<div id="main_content" data-role="content" style="padding: 0;">
+				<div class="message" message_id="0">
+					<div class="mess_head">
+						<div class="head_picture"></div>
+						<div class="mess_name_time">
+							<div class="mess_name" >孙俊威</div>
+							<div class="mess_time" >2017-5-26 15:37</div>
+						</div>
+					</div>
+					<div class="renwusheding">
+						<p>人物设定：一个夏天的冰激凌</p>
+					</div>
+					<div class="mess_content">
+						<p>我今天出去晒太阳，然后，我化掉了</p>
+					</div>
+					<img src="./picture/material1.JPG">
+					<div class="dianzhan_pinglun">
+						<div class="dianzhan" onClick="dianzhan(this)">点赞&nbsp;<span class="dianzhan_number"></span></div>
+						<div class="pinglun">评论</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="footer">
+				<h1>
+					<div class="shuaxin_fabu">
+						<div class="shuaxin">刷新页面</div>
+						<div class="fabu">发布状态</div>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+		<div data-role="page" id="personal_information"> <!-- 查看个人信息的界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="window.location='#main'"></div>
+				<h1>个人信息</h1>
+			</div>
+			<div data-role="content" style="background-color: #f9f9f9;">
+				<div class="message" style="padding: 0;margin: 0;border:none;background-color: #f9f9f9;">
+					<div class="mess_head" style="margin-left:0;">
+						<div class="head_picture per_head_picture"></div>
+						<div class="mess_name_time">
+							<div id="personal_information_name" class="mess_name" >孙俊威</div>
+							<div class="mess_time" >简介:暂无介绍</div>
+						</div>
+					</div>
+				</div>
+				<p style="color:rgba(55, 136, 60, 0.96);">发布:162 &nbsp; &nbsp;  关注:67 &nbsp; &nbsp;   粉丝:89</p>
+				<p>手机号码:</p>
+				<p id="per_phone_number">---</p>
+				<p>邮箱:</p>
+				<p id="per_email">---</p>
+				<p>住址:</p>
+				<p id="per_address">---</p>
+			</div>
+		</div>
+
+		<div data-role="page" id="fabu_page"><!-- 发布状态内容的界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="window.location='#main'"></div>
+				<h1>发布状态</h1>
+			</div>
+			<div data-role="content" id="fabu_content_div">
+				<p style="font-size:1.1em;color: rgba(55, 136, 60, 0.96);margin-bottom: 0.5em;">人物设定：</p>
+				<textarea id="renwusheding_content"  type="textarea" cols="30" rows="3" placeholder="模拟的物品......"></textarea>
+				<p style="font-size:1.1em;color: rgba(55, 136, 60, 0.96);margin-top:1em;margin-bottom: 0.5em;">输入内容:</p>
+                <textarea  id="fabu_content" type="textarea" cols="30" rows="10" placeholder="分享你的故事......"></textarea>
+                <p style="font-size:1.1em;color: rgba(55, 136, 60, 0.96);margin-top:1em;margin-bottom: 0.5em;">添加图片:</p>
+                <input class="select_fabu_picture" type="button"  value="选择图片">
+                
+			</div>
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="footer">
+				<h1 id="fasong">发 送</h1>
+			</div>		
+		</div>
+
+		<div data-role="page" id="write_pinglun_page"><!-- 书写评论内容的界面 -->
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="window.location='#main'"></div>
+				<h1>发评论</h1>
+			</div>
+			<div data-role="content" id="fabu_pinglun_div">
+				<textarea id="shuxei_pinglun_content"  type="textarea" cols="30" rows="3" placeholder="写评论......"></textarea>
+                
+			</div>
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="footer">
+				<h1 id="fasong_pinglun">发 送</h1>
+			</div>		
+		</div>
+
+		<div data-role="page" id="show_pinglun_page" style="background-color: white;"> <!-- 显示评论界面 -->
+
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<div class="header_logo logo_back" onclick="window.location='#main'"></div>
+				<h1>评论信息</h1>
+			</div>
+
+			<div id="pinglun_content" data-role="content" style="padding: 0;">
+<!-- 				<div class="message" style="border: none;">
+					<div class="mess_head">
+						<div class="head_picture"></div>
+						<div class="mess_name_time">
+							<div class="mess_name" >孙俊威</div>
+							<div class="mess_time" >2017-5-26 15:37</div>
+						</div>
+					</div>
+					<div class="pinglun_content">
+						<p>我今天出去晒太阳，然后，我化掉了,这是一个多么悲伤的故事啊。</p>
+					</div>
+				</div> -->
+			</div>
+
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="footer">
+				<h1 id="fabu_pinglun_h1">发布评论</h1>
+			</div>
+		</div>
+
+	</body>
+<script type="text/javascript" src="./js/login.js"></script>
+</html>
