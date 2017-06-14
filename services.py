@@ -49,7 +49,7 @@ def signup():
     user_mobile = unicode(request.POST.get('user_mobile'), "utf8")
     user_email = unicode(request.POST.get('user_email'), "utf8")
     user_address = unicode(request.POST.get('user_address'), "utf8")
-    print userid,password,selected_head_pic_src,user_mobile,user_email,user_address
+    #print userid,password,selected_head_pic_src,user_mobile,user_email,user_address
     cr=db.cursor()#新建游标 
     cr.execute("INSERT INTO user_information (userid,password,selected_head_pic_src,phone_number,email,address) \
     VALUES (%s,%s,%s,%s,%s,%s)",(userid,password,selected_head_pic_src,user_mobile,user_email,user_address))
@@ -108,7 +108,7 @@ def login():
     else:
         result["success"] = "no_this_user"
     cr.close()
-    print "result:",result
+    #print "result:",result
     return result
 
 @mybottle.route('/message_receive', method = 'POST')
@@ -128,7 +128,7 @@ def message_receive():
     db.commit()
     cr.close()
     result["success"] = True 
-    print "上传的消息内容：",userid,message_time,renwusheding,fabu_content,selected_fabu_pic_src
+    #print "上传的消息内容：",userid,message_time,renwusheding,fabu_content,selected_fabu_pic_src
     return result
 
 @mybottle.route('/dianzhan', method = 'POST')
@@ -147,13 +147,13 @@ def dianzhan():
     cr.execute("SELECT COUNT(*) FROM dianzan WHERE message_id = %s" ,(message_id))
     message_dianzan_number = cr.fetchall()[0][0]
     if (if_dianzhan) == 0:
-        print dianzhan_username + u"对消息message" + message_id + u"进行了点赞"
+        #print dianzhan_username + u"对消息message" + message_id + u"进行了点赞"
         result["yidianzan"] = 0
         cr.execute("INSERT INTO dianzan (message_id,dianzan_username,dianzan_time) VALUES (%s,%s,%s)",(message_id,dianzhan_username,dianzan_time)) 
         db.commit() 
         message_dianzan_number += 1
     else:
-        print dianzhan_username + u"对消息message" + message_id + u"取消了点赞"
+        #print dianzhan_username + u"对消息message" + message_id + u"取消了点赞"
         result["yidianzan"] = 1
         cr.execute("DELETE FROM dianzan WHERE message_id = %s AND dianzan_username = %s" ,(message_id,dianzhan_username))
         db.commit()
@@ -171,7 +171,7 @@ def pinglun_receive():
     pinglun_message_id = unicode(request.POST.get('pinglun_message_id'), "utf8") 
     shuxei_pinglun_content = unicode(request.POST.get('shuxei_pinglun_content'), "utf8")    
     pinglun_time = unicode(request.POST.get('pinglun_time'), "utf8") 
-    print pinglun_username,pinglun_message_id,shuxei_pinglun_content,pinglun_time
+    #print pinglun_username,pinglun_message_id,shuxei_pinglun_content,pinglun_time
     cr=db.cursor()
     cr.execute("INSERT INTO pinglun (message_id,pinglun_username,pinglun_content,pinglun_time) VALUES \
     (%s,%s,%s,%s)",(pinglun_message_id,pinglun_username,shuxei_pinglun_content,pinglun_time))
@@ -202,7 +202,7 @@ def pinglun_return():
         a_pinglun["head_pic"] = head_pic
         result["pinglun"].append(a_pinglun)
     cr.close()
-    print result
+    #print result
     return result
     
     
