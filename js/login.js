@@ -1,4 +1,7 @@
 /*sign up code*/
+var Server_address = "http://45.76.195.125:8088"
+/*var Server_address = "http://127.0.0.1:8088"*/
+
 $('#signup_user_id').blur(function(){ /*判断该用户名是否已被注册*/
     var userid = $("#signup_user_id").val();
     userid_can_use = false;
@@ -9,7 +12,7 @@ $('#signup_user_id').blur(function(){ /*判断该用户名是否已被注册*/
     }
     else{
         $.ajax({
-            url: "/check_userid",
+            url: Server_address + "/check_userid",
             type: "post",
             data: {
                 userid: userid,
@@ -125,7 +128,7 @@ $('#signup').click(function(){/*点击注册提交按钮，提交注册的信息
     var user_address = $("#signup-user-address").val() || "-" ;
     if (userid_can_use && password_can_use) {
         $.ajax({
-            url: "/signup",
+            url: Server_address + "/signup",
             type: "post",
             data: {
                 userid: userid,
@@ -167,7 +170,7 @@ $('#login_button').click(function(){/*点击登录按钮，从数据库提取该
     var login_password =$('#login_password').val();
     if (login_userid && login_password){
         $.ajax({
-            url: "/login",
+            url: Server_address + "/login",
             type: "post",
             data: {
                 userid: login_userid,
@@ -299,7 +302,7 @@ $('#fasong').click(function(){ /*发布状态时，输入要发布的内容后�
         alert("发布内容不能为空");
     }else{
         $.ajax({
-            url: "/message_receive",
+            url: Server_address + "/message_receive",
             type: "post",
             data: {
                 userid: userid,
@@ -336,7 +339,7 @@ function dianzhan(this_dianzhan){ /*点击点赞按钮执行的函数*/
         " " + now_time.getHours()+":"+now_time.getMinutes()+":"+now_time.getSeconds()
     console.log(message_id,dianzhan_username,dianzan_time);
     $.ajax({
-        url: "/dianzhan",
+        url: Server_address + "/dianzhan",
         type: "post",
         data:{
             message_id:message_id,
@@ -369,7 +372,7 @@ function pinglun(this_pinglun){ /*点击评论按钮时执行的函数*/
         window.location="#write_pinglun_page";
     }else{
         $.ajax({
-            url: "/pinglun_return", /*向服务器请求该条消息的评论信息*/
+            url: Server_address + "/pinglun_return", /*向服务器请求该条消息的评论信息*/
             type: "post",
             data: {
                 pinglun_message_id: pinglun_message_id
@@ -425,7 +428,7 @@ $('#fasong_pinglun').click(function(){ /*发布评论时，输入要发布的内
         $('#fasong_pinglun').css("text-shadow","none").css("background-color","transparent");
     }else{
         $.ajax({
-            url: "/pinglun_receive",
+            url: Server_address + "/pinglun_receive",
             type: "post",
             data: {
                 pinglun_username: pinglun_username,
