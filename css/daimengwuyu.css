@@ -21,10 +21,10 @@
 }
 
 .scan{
-	background-image:  url('../picture/scan.png');
+	background-image:  url('../picture/add.png');
 	right:0.7em;
-	height:2em;
-	width:2em;
+	height:1.7em;
+	width:1.7em;
 }
 
 .logo_back {
@@ -157,6 +157,32 @@ hr {
 	margin-top:0.6em;
 }
 
+.message > .mess_head > .add_guanzhu ,.shifouguanzhu{
+	position: absolute;
+	right: 1.5em;
+	top:0em;
+	margin-top: 0.4em;
+	color:#ff5200;
+	background-color: rgba(73, 161, 73, 0.52);
+	border:solid 0 black;
+	padding:0.2em;
+	font-size: 0.9em;
+	border-radius: 10%;
+}
+
+.message > .mess_head > .yiguanzhu{
+	position: absolute;
+	right: 1.5em;
+	top:0em;
+	margin-top: 0.4em;
+	color:#b6beb4;
+	background-color: #ffffff;
+	border:solid 0 black;
+	padding:0.2em;
+	font-size: 0.9em;
+	border-radius: 10%;
+}
+
 .message > .renwusheding{
 	position: relative;
 	margin: 0.2em;
@@ -192,10 +218,10 @@ hr {
 
 .message > img {
 	height:10em;
-	width:12em;
-	margin:0.4em;
+	width:10em;
+	margin-top:0.2em;
+	margin-bottom:0.2em;
 	margin-left: 0.5em;
-	border-top:1px solid black;
 }
 
 .dianzhan_pinglun{
@@ -267,11 +293,11 @@ hr {
 	position: absolute;bottom: 0;
 }
 
-.images > img ,#fabu_content_div > img{
+/*.images > img ,#fabu_content_div > img{
 	padding:0.15em;
 	width:5em;
 	height:5em;
-}
+}*/
 
 #pinglun_content > .message > .mess_head > .mess_name_time > .mess_name{
 	font-family: "楷体";

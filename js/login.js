@@ -1,7 +1,4 @@
 /*sign up code*/
-var Server_address = "http://45.76.195.125:8088"
-/*var Server_address = "http://127.0.0.1:8088"*/
-
 $('#signup_user_id').blur(function(){ /*判断该用户名是否已被注册*/
     var userid = $("#signup_user_id").val();
     userid_can_use = false;
@@ -91,7 +88,9 @@ $('#select_picture_determine').click(function(){ /*选择图像后点击确定�
             selected_head_pic_src = $("[chosed='1']")[0].src;
             selected_head_pic_src = selected_head_pic_src.substring(selected_head_pic_src.indexOf("picture"));
             console.log(selected_head_pic_src);
-            $('.select_head_picture').css('background-image',"url('./"+selected_head_pic_src + "')");
+            $("[chosed='1']").css("opacity","1");
+            $("[chosed='1']").attr("chosed","0");
+            $('.select_head_picture').css('background-image',"url('" + Server_address + "/" + selected_head_pic_src + "')");
             $('.select_head_picture').css("opacity",1);
             $('.select_head_picture > p').css('display','none');
             $('#mengmengda').text("头像已选择");
@@ -122,10 +121,9 @@ $('#select_picture_determine').click(function(){ /*选择图像后点击确定�
 $('#signup').click(function(){/*点击注册提交按钮，提交注册的信息，并返回注册是否成功的标识*/
     var userid = $("#signup_user_id").val();
     var password = $("#signup-password-repeat").val();
-    var nickname = $("#signup-user-name").val() || "-";
-    var user_mobile = $("#signup-user-mobile").val() || "-";
-    var user_email = $("#signup-user-email").val() || "-";
-    var user_address = $("#signup-user-address").val() || "-" ;
+    var user_mobile = $("#signup-user-mobile").val() || "无";
+    var user_email = $("#signup-user-email").val() || "无";
+    var user_address = $("#signup-user-address").val() || "无" ;
     if (userid_can_use && password_can_use) {
         $.ajax({
             url: Server_address + "/signup",
@@ -168,6 +166,8 @@ $('#signup').click(function(){/*点击注册提交按钮，提交注册的信息
 $('#login_button').click(function(){/*点击登录按钮，从数据库提取该用户数据，返回在页面显示*/
     var login_userid =$('#login_userid').val();
     var login_password =$('#login_password').val();
+    localStorage.setItem("login_userid",login_userid);
+    localStorage.setItem("login_password",login_password);
     if (login_userid && login_password){
         $.ajax({
             url: Server_address + "/login",
@@ -194,70 +194,108 @@ $('#login_button').click(function(){/*点击登录按钮，从数据库提取该
                     $('#login-result').css("display","none");
                     $('#login-result').text("用户名和密码输入正确").addClass("tishi").slideDown(300);
                     $('#login-result').css("color","green"); 
+                    document.getElementById("personal_information_name").innerHTML = result["per_inf"]["userid"];
                     $('#per_phone_number').text(result["per_inf"]["phone_number"]);
                     $('#per_email').text(result["per_inf"]["email"]);
                     $('#per_address').text(result["per_inf"]["address"]);
-                    $('.per_head_picture').css("background-image","url('./" + result['per_inf']['head_pic'] + "')");
+                    $('.per_head_picture').css("background-image","url('"+ Server_address +'/'+ result['per_inf']['head_pic'] + "')");
                     var messages = result["message"];
                     var messages_len = messages.length;
                     var main_content = $('#main_content');
-                    for (var i =0;i<messages_len;i++){
-                    /*插入好友圈中的各条信息，a_message为一个模板，将实际信息的相关字段替换掉a_message里的字段，并插入到网页的相关位置*/
-                        var a_message = 
-                            '<div class="message" message_id="this_message_id">\
-                                    <div class="mess_head">\
-                                        <div class="head_picture" style="background-image: url(this_message_head_pic);"></div>\
-                                        <div class="mess_name_time">\
-                                            <div class="mess_name" >孙俊威</div>\
-                                            <div class="mess_time" >this_message_time</div>\
-                                        </div>\
-                                    </div>\
-                                    <div class="renwusheding">\
-                                        <p>人物设定：this_message_renwusheding</p>\
-                                    </div>\
-                                    <div class="mess_content">\
-                                        <p>this_message_content</p>\
-                                    </div>\
-                                    this_message_content_pic\
-                                    <div class="dianzhan_pinglun">\
-                                        <div class="shifoudianzhan" onClick="dianzhan(this)">点赞 <span class="dianzhan_number">this_message_dianzan_number</span></div>\
-                                        <div class="pinglun" onClick="pinglun(this)">评论 <span class="pinglun_number">this_message_pinglun_number</span></div>\
-                                    </div>\
-                                </div>'
-                        a_message = a_message.replace(/this_message_time/,messages[i]["message_time"]).
-                        replace(/this_message_renwusheding/,messages[i]["renwusheding"]).
-                        replace(/this_message_content/,messages[i]["content"]).
-                        replace(/this_message_id/,messages[i]["id"]).
-                        replace(/this_message_dianzan_number/,messages[i]["dianzan_number"]).
-                        replace(/this_message_pinglun_number/,messages[i]["pinglun_number"]).
-                        replace(/this_message_head_pic/,"\'./"+result['per_inf']['head_pic']+"\'");
-                        var this_message_content_pic = messages[i]["user_picture"].split(',');/*此为该条信息下的发布的图片，各图片之间用逗号分隔*/
-                        var this_message_content_pic_len = this_message_content_pic.length;/*计算有几张图片*/
-                        var this_message_content_pic_str = "";
-                        if (this_message_content_pic_len == 0){
-                            a_message = a_message.replace(/this_message_content_pic/,"");
-                        }else if(this_message_content_pic_len == 1){
-                            this_message_content_pic_str = "<img style='width:15em;height:15em' src='./" + this_message_content_pic[0] + "'>";
-                        }else if(this_message_content_pic_len == 2 || this_message_content_pic_len == 4){
-                            for (var j=0;j<this_message_content_pic_len;j++){
-                                this_message_content_pic_str = this_message_content_pic_str + 
-                                "<img style='width:10em;height:10em' src='./" + this_message_content_pic[j] + "'>";
-                            }/*将所有图片写成一个字符串，并插入到相关位置*/
-                        }else{
-                            for (var j=0;j<this_message_content_pic_len;j++){
-                                this_message_content_pic_str = this_message_content_pic_str + 
-                                "<img style='width:6.6em;height:6.6em' src='./" + this_message_content_pic[j] + "'>";
-                            }
-                        }
-                        a_message = a_message.replace(/this_message_content_pic/,this_message_content_pic_str);
-                        if (messages[i]["if_dianzan"] == 0){/*该用户对该信息已点赞，则显示信息时其颜色为红色，不然为灰色*/
-                            a_message = a_message.replace(/shifoudianzhan/,"dianzhan");
-                        }else{
-                            a_message = a_message.replace(/shifoudianzhan/,"yidianzhan");
-                        }
+                    if (messages_len == 0){
+                        a_message = '<p class="atishi" style="color:green;padding:1em;text-shadow:0 0 1px black;">您当前未有关注人的信息哦，点击右上角+添加按钮去关注其他人吧~\
+                                    </p>';
                         main_content.append(a_message);
-                    }
+                    }else{
+                        for (var i =0;i<messages_len;i++){
+                        /*插入好友圈中的各条信息，a_message为一个模板，将实际信息的相关字段替换掉a_message里的字段，并插入到网页的相关位置*/
+                            var a_message = 
+                                '<div class="message" message_id="this_message_id">\
+                                        <div class="mess_head">\
+                                            <div class="head_picture" style="background-image: url(this_message_head_pic);"></div>\
+                                            <div class="mess_name_time">\
+                                                <div class="mess_name" >this_message_userid</div>\
+                                                <div class="mess_time" >this_message_time</div>\
+                                            </div>\
+                                            <div class="shifouguanzhu" onClick="guanzhu(this)">是否关注</div>\
+                                        </div>\
+                                        <div class="renwusheding">\
+                                            <p>人物设定：this_message_renwusheding</p>\
+                                        </div>\
+                                        <div class="mess_content">\
+                                            <p>this_message_content</p>\
+                                        </div>\
+                                        this_message_content_pic\
+                                        <div class="dianzhan_pinglun">\
+                                            <div class="shifoudianzhan" onClick="dianzhan(this)">点赞 <span class="dianzhan_number">this_message_dianzan_number</span></div>\
+                                            <div class="pinglun" onClick="pinglun(this)">评论 <span class="pinglun_number">this_message_pinglun_number</span></div>\
+                                        </div>\
+                                    </div>'
+                            a_message = a_message.replace(/this_message_time/,messages[i]["message_time"]).
+                            replace(/this_message_renwusheding/,messages[i]["renwusheding"]).
+                            replace(/this_message_content/,messages[i]["content"]).
+                            replace(/this_message_id/,messages[i]["id"]).
+                            replace(/this_message_userid/,messages[i]["user_id"]).
+                            replace(/this_message_dianzan_number/,messages[i]["dianzan_number"]).
+                            replace(/this_message_pinglun_number/,messages[i]["pinglun_number"]).
+                            replace(/this_message_head_pic/,"\'./"+messages[i]["user_head_picture"]+"\'");
+                            var this_message_content_pic = messages[i]["user_picture"].split(',');/*此为该条信息下的发布的图片，各图片之间用逗号分隔*/
+                            var this_message_content_pic_len = this_message_content_pic.length;/*计算有几张图片*/
+                            var this_message_content_pic_str = "";
+                            if (this_message_content_pic_len == 0){
+                                a_message = a_message.replace(/this_message_content_pic/,"");
+                            }else if(this_message_content_pic_len == 1){
+                                if (equipment == "Android"){
+                                    this_message_content_pic_str = "<img style='width:" + message_1_pic_pingmu_width
+                                     + "px;height:" + message_1_pic_pingmu_width + "px;' src='./" + this_message_content_pic[0] + "'>";
+                                }else{
+                                    this_message_content_pic_str = "<img style='width:15em;height:15em' src='./" + this_message_content_pic[0] + "'>";
+                                }
+                            }else if(this_message_content_pic_len == 2 || this_message_content_pic_len == 4){
+                                if (equipment == "Android") {
+                                    for (var j=0;j<this_message_content_pic_len;j++){
+                                        this_message_content_pic_str = this_message_content_pic_str + "<img style='width:" + message_2_pic_pingmu_width
+                                         + "px;height:" + message_2_pic_pingmu_width + "px;' src='./" + this_message_content_pic[j] + "'>";
+                                    }/*将所有图片写成一个字符串，并插入到相关位置*/
+                                }else{
+                                    for (var j=0;j<this_message_content_pic_len;j++){
+                                        this_message_content_pic_str = this_message_content_pic_str + 
+                                        "<img style='width:10em;height:10em' src='./" + this_message_content_pic[j] + "'>";
+                                    }/*将所有图片写成一个字符串，并插入到相关位置*/
+                                }
+                            }else{
+                                if (equipment == "Android") {
+                                    for (var j=0;j<this_message_content_pic_len;j++){
+                                        this_message_content_pic_str = this_message_content_pic_str + "<img style='width:" + message_3_pic_pingmu_width
+                                         + "px;height:" + message_3_pic_pingmu_width + "px;' src='./" + this_message_content_pic[j] + "'>";
+                                    }/*将所有图片写成一个字符串，并插入到相关位置*/
+                                }else{
+                                    for (var j=0;j<this_message_content_pic_len;j++){
+                                        this_message_content_pic_str = this_message_content_pic_str + 
+                                        "<img style='width:6.5em;height:6.5em' src='./" + this_message_content_pic[j] + "'>";
+                                    }/*将所有图片写成一个字符串，并插入到相关位置*/
+                                }
+                            }
+                            a_message = a_message.replace(/this_message_content_pic/,this_message_content_pic_str);
+                            if (messages[i]["if_dianzan"] == 0){/*该用户对该信息已点赞，则显示信息时其颜色为红色，不然为灰色*/
+                                a_message = a_message.replace(/shifoudianzhan/,"dianzhan");
+                            }else{
+                                a_message = a_message.replace(/shifoudianzhan/,"yidianzhan");
+                            }
 
+                            if (messages[i]["user_id"] == login_userid){
+                                a_message = a_message.replace(/shifouguanzhu/,"yiguanzhu");
+                                a_message = a_message.replace(/是否关注/,"自己");                            
+                            }else if (messages[i]["if_guanzhu"] == 0){/*对该用户未进行关注，显示信息时其颜色为红色，不然为灰色*/
+                                a_message = a_message.replace(/shifouguanzhu/,"add_guanzhu");
+                                a_message = a_message.replace(/是否关注/,"+关注");
+                            }else{
+                                a_message = a_message.replace(/shifouguanzhu/,"yiguanzhu");
+                                a_message = a_message.replace(/是否关注/,"已关注");
+                            }
+                            main_content.append(a_message);
+                        }
+                    }
                     window.setTimeout(function(){window.location="#main";},300);                  
                 }
             }        
@@ -280,18 +318,9 @@ $('.fabu').click(function(){/*点击发布按钮，跳转到发布内容的页�
     },300);
 });
 
-$('.shuaxin').click(function(){/*点击刷新按钮，刷新页面*/
-    $('.shuaxin').css("text-shadow","0px 0px 1px black");
-    $('#main_content > .message').remove();
-    document.getElementById('login_button').click();
-    window.setTimeout(function(){
-        $('.shuaxin').css("text-shadow","none");
-    },300);
-});
-
 $('#fasong').click(function(){ /*发布状态时，输入要发布的内容后，点击发送按钮执行的函数*/
     $('#fasong').css("text-shadow","0px 0px 1px black").css("background-color","rgba(171, 200, 172, 0.960784)");
-    var userid = $('#personal_information_name').text();
+    var userid = login_userid || $('#personal_information_name').text() ;
     var renwusheding = $('#renwusheding_content').val() || "-";
     var fabu_content = $('#fabu_content').val() || "-";
     var now_time = new Date();
@@ -328,6 +357,38 @@ $('#fasong').click(function(){ /*发布状态时，输入要发布的内容后�
 });
 
 $('.personal_infor').click(function(){ /*点击查看个人信息按钮，进入个人信息界面*/
+    var login_userid =$('#login_userid').val();
+    $.ajax({
+        url: Server_address + "/personal_infor",
+        type: "post",
+        data: {
+            login_userid: login_userid,
+        },
+        datatype: "json",
+        async: true,
+        crossDomain: true,
+        success:function(result){
+            document.getElementsByClassName('fabu_number')[0].innerHTML = result["fabu_number"];
+            document.getElementsByClassName('guanzhu_number')[0].innerHTML = result["guanzhu_usernames_len"];
+            document.getElementsByClassName('fensi_number')[0].innerHTML = result["fensi_usernames_len"];
+            if (result["guanzhu_usernames"].toString()){
+                var guanzhu_usernames = "";
+                var guanzhu_usernames_len = result["guanzhu_usernames"].length;
+                for (var i=0;i<guanzhu_usernames_len;i++){
+                    guanzhu_usernames = guanzhu_usernames + result["guanzhu_usernames"][i] +"&nbsp;&nbsp;";
+                }
+            }
+            if (result["fensi_usernames"].toString()){
+                var fensi_usernames = "";
+                var fensi_usernames_len = result["fensi_usernames"].length;
+                for (var i=0;i<fensi_usernames_len;i++){
+                    fensi_usernames = fensi_usernames + result["fensi_usernames"][i] +"&nbsp;&nbsp;";
+                }
+            }
+            document.getElementsByClassName('guanzhu_persons')[0].innerHTML = guanzhu_usernames || "无";
+            document.getElementsByClassName('your_fans')[0].innerHTML = fensi_usernames || "无";
+        }
+    });
     window.location = "#personal_information"
 });
 
