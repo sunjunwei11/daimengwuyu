@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-06-14 19:52:13
+Date: 2017-06-19 12:06:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,8 +28,22 @@ CREATE TABLE `dianzan` (
 -- ----------------------------
 -- Records of dianzan
 -- ----------------------------
-INSERT INTO `dianzan` VALUES ('15', '孙俊威', '2017-6-12 13:40:26');
-INSERT INTO `dianzan` VALUES ('14', '孙俊威', '2017-6-12 13:42:15');
+INSERT INTO `dianzan` VALUES ('18', '孙俊威', '2017-6-19 10:52:10');
+INSERT INTO `dianzan` VALUES ('21', '高山语', '2017-6-19 11:33:31');
+
+-- ----------------------------
+-- Table structure for `guanzhu`
+-- ----------------------------
+DROP TABLE IF EXISTS `guanzhu`;
+CREATE TABLE `guanzhu` (
+  `login_userid` varchar(255) DEFAULT NULL,
+  `guanzhu_username` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of guanzhu
+-- ----------------------------
+INSERT INTO `guanzhu` VALUES ('高山语', '孙俊威');
 
 -- ----------------------------
 -- Table structure for `message`
@@ -45,16 +59,14 @@ CREATE TABLE `message` (
   `dianzan_number` int(10) DEFAULT '0',
   `pinglun_number` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-INSERT INTO `message` VALUES ('11', '孙俊威', 'picture/zzm1.jpg,picture/zzm3.jpg', '2017-6-9 16:35:34', '112', '21是', '0', '3');
-INSERT INTO `message` VALUES ('12', '孙俊威', 'picture/zzm3.jpg,picture/zzm4.jpg,picture/zzm6.jpg', '2017-6-9 16:36:10', 'dog', '感受到分', '0', '3');
-INSERT INTO `message` VALUES ('13', '孙俊威', 'picture/zzm6.jpg', '2017-6-9 22:42:0', '书本', '来，我给你们精神食粮', '0', '0');
-INSERT INTO `message` VALUES ('14', '孙俊威', 'picture/zzm4.jpg,picture/zzm5.jpg,picture/zzm6.jpg,picture/zzm7.jpg', '2017-6-10 16:34:12', '篮球', '今天这场比赛，真的是精心策划的一场比赛啊。', '1', '0');
-INSERT INTO `message` VALUES ('15', '孙俊威', 'picture/zzm1.jpg,picture/zzm3.jpg,picture/zzm4.jpg,picture/zzm6.jpg,picture/zzm7.jpg', '2017-6-10 16:38:30', '手机', '别玩我了，再玩要被你玩坏了。', '1', '0');
+INSERT INTO `message` VALUES ('18', '孙俊威', 'picture/a18bjl1.jpg,picture/a18bjl2.jpg', '2017-6-19 9:47:6', '夏天的冰激凌', '给大家讲一个悲伤的故事，今天我出去晒太阳，然后就化掉了，完。', '1', '0');
+INSERT INTO `message` VALUES ('19', '孙俊威', 'picture/a18fs3.jpg', '2017-6-19 9:59:11', '一只努力的风扇', '主人抓住我的胳膊对我说，小风扇呐，我夏天就要靠你了啊！你要加油呐。----我好感动啊！我要转到天荒地老！', '0', '0');
+INSERT INTO `message` VALUES ('21', '高山语', 'picture/a10nsfj3.jpg,picture/a18sj4.jpg,picture/a19sj1.jpg', '2017-6-19 11:32:51', '有觉悟的手机', '别再玩我啦，天天玩手机的人一点都不酷~去看看大自然的风景吧~', '1', '0');
 
 -- ----------------------------
 -- Table structure for `pinglun`
@@ -70,12 +82,6 @@ CREATE TABLE `pinglun` (
 -- ----------------------------
 -- Records of pinglun
 -- ----------------------------
-INSERT INTO `pinglun` VALUES ('12', '孙俊威', '哒哒哒大的', '2017-6-12 17:16:36');
-INSERT INTO `pinglun` VALUES ('12', '孙俊威', '哒哒哒大的冯绍峰', '2017-6-12 17:17:12');
-INSERT INTO `pinglun` VALUES ('11', '孙俊威', 'ggg', '2017-6-12 17:17:52');
-INSERT INTO `pinglun` VALUES ('12', '孙俊威', 'ggg发士大夫', '2017-6-12 17:22:44');
-INSERT INTO `pinglun` VALUES ('11', '孙俊威', '撒敌法', '2017-6-12 22:55:10');
-INSERT INTO `pinglun` VALUES ('11', '孙俊威', '发布一条评论', '2017-6-13 16:40:7');
 
 -- ----------------------------
 -- Table structure for `user_information`
@@ -93,11 +99,8 @@ CREATE TABLE `user_information` (
 -- ----------------------------
 -- Records of user_information
 -- ----------------------------
-INSERT INTO `user_information` VALUES ('孙俊威', '123456', 'picture/zzm3.jpg', '18771022119', '18771022119@163.com', '武汉理工大学东院');
-INSERT INTO `user_information` VALUES ('孙俊威啊', '11', 'picture/zzm3.jpg', '企鹅', '方法', '-');
-INSERT INTO `user_information` VALUES ('234', '11', 'picture/zzm5.jpg', '-', '-', '-');
-INSERT INTO `user_information` VALUES ('2332', '33', 'picture/zzm4.jpg', '-', '-', '-');
-INSERT INTO `user_information` VALUES ('345', '55', 'picture/zzm3.jpg', '-', '-', '-');
+INSERT INTO `user_information` VALUES ('孙俊威', 'sunjunwei11', 'picture/a2xqx1.jpg', '18771022119', '18771022119@163.com', '武汉理工大学_西院_狮城公寓_731');
+INSERT INTO `user_information` VALUES ('高山语', 'sunjunwei11', 'picture/a2xqx4.jpg', '18771022119', '18771022119@163.com', '武汉理工大学_西院_狮城公寓_731');
 DROP TRIGGER IF EXISTS `whenInsert`;
 DELIMITER ;;
 CREATE TRIGGER `whenInsert` AFTER INSERT ON `dianzan` FOR EACH ROW BEGIN
